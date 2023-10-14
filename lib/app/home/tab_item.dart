@@ -14,4 +14,30 @@ class TabItemData {
     TabItem.entries: TabItemData(title: 'Entries', icon: Icons.view_headline),
     TabItem.account: TabItemData(title: 'Account', icon: Icons.person),
   };
+
+  static  NavigationDestination _buildItem(TabItemData tabItem) {
+    return NavigationDestination(label: tabItem.title, icon: Icon(tabItem.icon));
+  }
+  static  NavigationRailDestination _buildRailItem(TabItemData tabItem) {
+    return NavigationRailDestination(
+      label: Text(tabItem.title),
+      icon: Icon(tabItem.icon),
+    );
+  }
+  static  List<NavigationDestination> buildNavigationDestination(){
+    List<NavigationDestination> navigationDestinations = [];
+    for (final item in allTabs.entries)
+      {
+        navigationDestinations.add(_buildItem(item.value));
+      }
+    return navigationDestinations;
+  }
+  static  List<NavigationRailDestination> buildRainNavigationDestination(){
+    List<NavigationRailDestination> navigationDestinations = [];
+    for (final item in allTabs.entries)
+      {
+        navigationDestinations.add(_buildRailItem(item.value));
+      }
+    return navigationDestinations;
+  }
 }

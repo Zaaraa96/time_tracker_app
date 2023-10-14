@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker_app/app/landing_page.dart';
+import 'package:time_tracker_app/routes.dart';
 import 'package:time_tracker_app/services/auth.dart';
 import 'package:time_tracker_app/services/database.dart';
 
@@ -22,14 +23,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Provider<AuthBase>(
       create: (context) => Auth(),
-      child: MaterialApp(
+      child: MaterialApp.router(
+      routerConfig: routers,
         title: 'Time Tracker',
         theme: ThemeData(
           primarySwatch: Colors.indigo,
         ),
-        home: LandingPage(
-          databaseBuilder: (uid) => FirestoreDatabase(uid: uid),
-        ),
+        // home: LandingPage(
+        //   databaseBuilder: (uid) => FirestoreDatabase(uid: uid),
+        // ),
       ),
     );
   }
