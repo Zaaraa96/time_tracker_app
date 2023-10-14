@@ -3,6 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:time_tracker_app/services/database.dart';
 
+import 'app/home/account/account_page.dart';
+import 'app/home/entries/entries_page.dart';
+import 'app/home/jobs/jobs_page.dart';
 import 'app/home/tab_item.dart';
 import 'app/landing_page.dart';
 import 'common_widgets/scaffold_with_nested_navigation.dart';
@@ -44,7 +47,7 @@ final routers = GoRouter(
             GoRoute(
               path: '/jobs',
               pageBuilder: (context, state) => const NoTransitionPage(
-                child: RootScreen(label: 'A', detailsPath: '/a/details'),
+                child: JobsPage(),
               ),
               routes: [
                 GoRoute(
@@ -60,8 +63,8 @@ final routers = GoRouter(
           routes: [
             GoRoute(
               path: '/entries',
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: RootScreen(label: 'A', detailsPath: '/a/details'),
+              pageBuilder: (context, state) => NoTransitionPage(
+                child: EntriesPage.create(context),
               ),
               routes: [
                 GoRoute(
@@ -77,8 +80,8 @@ final routers = GoRouter(
           routes: [
             GoRoute(
               path: '/account',
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: RootScreen(label: 'A', detailsPath: '/a/details'),
+              pageBuilder: (context, state) => NoTransitionPage(
+                child: AccountPage(),
               ),
               routes: [
                 GoRoute(
