@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:time_tracker_app/app/sign_in/screen/email_sign_in_form_change_notifier.dart';
+import 'email_sign_in_form_bloc_based.dart';
 
 class EmailSignInPage extends StatelessWidget {
   @override
@@ -13,7 +13,7 @@ class EmailSignInPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Card(
-            child: EmailSignInFormChangeNotifier.create(context),
+            child: EmailSignInFormBlocBased.create(context),
           ),
         ),
       ),

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker_app/app/sign_in/bloc/email_sign_in_bloc.dart';
 import 'package:time_tracker_app/app/sign_in/model/email_sign_in_model.dart';
@@ -9,7 +8,7 @@ import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart
 import 'package:time_tracker_app/services/auth.dart';
 
 class EmailSignInFormBlocBased extends StatefulWidget {
-  EmailSignInFormBlocBased({required this.bloc});
+  const EmailSignInFormBlocBased({super.key, required this.bloc});
   final EmailSignInBloc bloc;
 
   static Widget create(BuildContext context) {
@@ -24,7 +23,7 @@ class EmailSignInFormBlocBased extends StatefulWidget {
   }
 
   @override
-  _EmailSignInFormBlocBasedState createState() =>
+  State<EmailSignInFormBlocBased> createState() =>
       _EmailSignInFormBlocBasedState();
 }
 

@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker_app/app/sign_in/screen/sign_in_page.dart';
 import 'package:time_tracker_app/services/auth.dart';
 import 'package:time_tracker_app/services/database.dart';
+
+import '../navigation.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key, required this.databaseBuilder}) : super(key: key);
@@ -23,7 +24,7 @@ class _LandingPageState extends State<LandingPage> {
     auth = Provider.of<AuthBase>(context, listen: false);
     auth.authStateChanges().listen((User? user) {
       if(user !=null) {
-          context.go('/jobs');
+        goToJobs(context);
       }
     });
     super.initState();

@@ -6,6 +6,7 @@ import 'package:time_tracker_app/app/jobs/model/job.dart';
 import 'package:time_tracker_app/services/auth.dart';
 import 'package:time_tracker_app/services/database.dart';
 import 'app/account/screen/account_page.dart';
+import 'app/entries/bloc/entries_bloc.dart';
 import 'app/entries/screen/entries_page.dart';
 import 'app/jobs/screen/edit_job_page.dart';
 import 'app/jobs/screen/jobs_page.dart';
@@ -79,15 +80,23 @@ final routers = GoRouter(
           routes: [
             GoRoute(
               path: '/entries',
-              pageBuilder: (context, state) => NoTransitionPage(
-                child: EntriesPage.create(context),
-              ),
-              routes: [
-                GoRoute(
-                  path: 'details', //todo
-                  builder: (context, state) => const DetailsScreen(label: 'A'),
-                ),
-              ],
+              pageBuilder: (context, state)
+              {
+                final uid = Provider.of<AuthBase>(context, listen: false).currentUser?.uid ?? '';
+                return NoTransitionPage(
+                  child: Provider<Database?>(
+                    create: (_) =>
+                        FirestoreDatabase(uid: uid),
+                    child: Consumer<Database>(
+                      builder: (BuildContext context, value, Widget? child) {
+                        return Provider<EntriesBloc>(
+                          create: (_) => EntriesBloc(database: value),
+                          child: const EntriesPage(),
+                        );
+                      },
+                    ),
+                  ));},
+              routes: const [],
             ),
           ],
         ),

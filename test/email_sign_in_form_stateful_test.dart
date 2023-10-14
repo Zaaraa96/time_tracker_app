@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
-import 'package:time_tracker_app/app/sign_in/screen/email_sign_in_form_stateful.dart';
 import 'package:time_tracker_app/services/auth.dart';
 
 import 'mocks.dart';
