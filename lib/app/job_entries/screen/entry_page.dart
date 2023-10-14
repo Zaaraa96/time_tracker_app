@@ -6,6 +6,7 @@ import 'package:time_tracker_app/app/jobs/model/job.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_app/services/database.dart';
 
+import '../../../navigation.dart';
 import '../model/format.dart';
 
 class EntryPage extends StatefulWidget {
@@ -14,16 +15,16 @@ class EntryPage extends StatefulWidget {
   final Job? job;
   final Entry? entry;
 
-  static Future<void> show(
-      {required BuildContext context, Database? database, Job? job, Entry? entry}) async {
-    await Navigator.of(context, rootNavigator: true).push(
-      MaterialPageRoute(
-        builder: (context) =>
-            EntryPage(database: database, job: job, entry: entry),
-        fullscreenDialog: true,
-      ),
-    );
-  }
+  // static Future<void> show(
+  //     {required BuildContext context, Database? database, Job? job, Entry? entry}) async {
+  //   await Navigator.of(context, rootNavigator: true).push(
+  //     MaterialPageRoute(
+  //       builder: (context) =>
+  //           EntryPage(database: database, job: job, entry: entry),
+  //       fullscreenDialog: true,
+  //     ),
+  //   );
+  // }
 
   @override
   State<StatefulWidget> createState() => _EntryPageState();
@@ -69,7 +70,7 @@ class _EntryPageState extends State<EntryPage> {
     try {
       final entry = _entryFromState();
       await widget.database!.setEntry(entry);
-      Navigator.of(context).pop();
+      pop(context);
     } on FirebaseException catch (e) {
       showExceptionAlertDialog(
         context,

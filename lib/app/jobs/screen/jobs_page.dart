@@ -5,7 +5,6 @@ import 'package:time_tracker_app/app/jobs/model/job.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_app/services/database.dart';
 import '../../../navigation.dart';
-import '../../job_entries/screen/job_entries_page.dart';
 import 'job_list_tile.dart';
 import '../../../common_widgets/list_items_builder.dart';
 
@@ -56,7 +55,7 @@ class JobsPage extends StatelessWidget {
             onDismissed: (direction) => _delete(context, job),
             child: JobListTile(
               job: job,
-              onTap: () => JobEntriesPage.show(context, job),
+              onTap: () => goToJobEntries(context,job: job),
             ),
           ),
         );

@@ -5,6 +5,8 @@ import 'package:time_tracker_app/common_widgets/show_alert_dialog.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_app/services/database.dart';
 
+import '../../../navigation.dart';
+
 
 
 class EditJobPage extends StatefulWidget {
@@ -60,7 +62,7 @@ class _EditJobPageState extends State<EditJobPage> {
           final id = widget.job?.id ?? documentIdFromCurrentDate();
           final job = Job(id: id, name: _name, ratePerHour: _ratePerHour);
           await widget.database!.setJob(job);
-          Navigator.of(context).pop();
+          pop(context);
         }
       } on FirebaseException catch (e) {
         showExceptionAlertDialog(

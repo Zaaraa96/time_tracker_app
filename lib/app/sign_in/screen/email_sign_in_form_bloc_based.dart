@@ -7,6 +7,8 @@ import 'package:time_tracker_app/common_widgets/form_submit_button.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_app/services/auth.dart';
 
+import '../../../navigation.dart';
+
 class EmailSignInFormBlocBased extends StatefulWidget {
   const EmailSignInFormBlocBased({super.key, required this.bloc});
   final EmailSignInBloc bloc;
@@ -45,7 +47,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
   Future<void> _submit() async {
     try {
       await widget.bloc.submit();
-      Navigator.of(context).pop();
+      pop(context);
     } on FirebaseAuthException catch (e) {
       showExceptionAlertDialog(
         context,
