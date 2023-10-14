@@ -1,6 +1,8 @@
 
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:time_tracker_app/services/auth.dart';
 import 'package:time_tracker_app/services/database.dart';
 
 import 'app/home/account/account_page.dart';
@@ -46,9 +48,10 @@ final routers = GoRouter(
           routes: [
             GoRoute(
               path: '/jobs',
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: JobsPage(),
-              ),
+              pageBuilder: (context, state) =>  NoTransitionPage(
+                child:  Provider<Database?>(
+                create: (_) => FirestoreDatabase(uid: state.pathParameters['uid']!),
+                child: JobsPage(uid: Provider.of<AuthBase>(context, listen: false).currentUser?.uid ?? ''))),
               routes: [
                 GoRoute(
                   path: 'details', //todo

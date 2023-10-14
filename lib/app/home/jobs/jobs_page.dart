@@ -13,8 +13,8 @@ import 'package:time_tracker_app/services/auth.dart';
 import 'package:time_tracker_app/services/database.dart';
 
 class JobsPage extends StatelessWidget {
-  const JobsPage({super.key});
-
+  const JobsPage({super.key, required this.uid});
+  final String uid;
 
 
   Future<void> _delete(BuildContext context, Job job) async {
@@ -40,7 +40,7 @@ class JobsPage extends StatelessWidget {
             icon: Icon(Icons.add, color: Colors.white),
             onPressed: () => EditJobPage.show(
               context,
-              database: Provider.of<Database>(context, listen: false),
+              database: FirestoreDatabase(uid: uid),
             ),
           ),
         ],
@@ -50,9 +50,8 @@ class JobsPage extends StatelessWidget {
   }
 
   Widget _buildContents(BuildContext context) {
-    final database = Provider.of<Database>(context, listen: false);
     return StreamBuilder<List<Job>>(
-      stream: database.jobsStream(),
+      stream: FirestoreDatabase(uid: uid).jobsStream(),
       builder: (context, snapshot) {
         return ListItemsBuilder<Job>(
           snapshot: snapshot,
