@@ -6,13 +6,13 @@ import 'package:time_tracker_app/services/auth.dart';
 
 import 'firebase_options.dart';
 
-//todo: 1.add add routes with go_router
+//todo: 1.add all routes with go_router
 //todo: 2.put all navigation in one file
 //todo: 3.add locale support for farsi
 //todo: 4.add sign in with email and password and reset password in  account screen
 //todo: 5.make app feature first
 //todo: 6.add repository pattern
-//todo: 7.add icon for app
+//7.add icon for app done
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

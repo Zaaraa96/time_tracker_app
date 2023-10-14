@@ -1,8 +1,8 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:time_tracker_app/app/sign_in/email_sign_in_bloc.dart';
-import 'package:time_tracker_app/app/sign_in/email_sign_in_model.dart';
+import 'package:time_tracker_app/app/sign_in/bloc/email_sign_in_bloc.dart';
+import 'package:time_tracker_app/app/sign_in/model/email_sign_in_model.dart';
 
 import 'mocks.dart';
 

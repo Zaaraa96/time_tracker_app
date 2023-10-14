@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:time_tracker_app/app/home/models/job.dart';
+import 'package:time_tracker_app/app/jobs/model/job.dart';
 
 void main() {
   group('fromMap', () {

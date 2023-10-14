@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
-import 'package:time_tracker_app/app/home/models/entry.dart';
-import 'package:time_tracker_app/app/home/models/job.dart';
+import 'package:time_tracker_app/app/entries/model/entry.dart';
+import 'package:time_tracker_app/app/jobs/model/job.dart';
 import 'package:time_tracker_app/services/api_path.dart';
 import 'package:time_tracker_app/services/firestore_service.dart';
 

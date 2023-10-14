@@ -2,13 +2,14 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:time_tracker_app/app/jobs/model/job.dart';
 import 'package:time_tracker_app/services/auth.dart';
 import 'package:time_tracker_app/services/database.dart';
-
-import 'app/home/account/account_page.dart';
-import 'app/home/entries/entries_page.dart';
-import 'app/home/jobs/jobs_page.dart';
-import 'app/home/tab_item.dart';
+import 'app/account/screen/account_page.dart';
+import 'app/entries/screen/entries_page.dart';
+import 'app/jobs/screen/edit_job_page.dart';
+import 'app/jobs/screen/jobs_page.dart';
+import 'common_widgets/tab_item.dart';
 import 'app/landing_page.dart';
 import 'common_widgets/scaffold_with_nested_navigation.dart';
 
@@ -48,14 +49,26 @@ final routers = GoRouter(
           routes: [
             GoRoute(
               path: '/jobs',
-              pageBuilder: (context, state) =>  NoTransitionPage(
-                child:  Provider<Database?>(
-                create: (_) => FirestoreDatabase(uid: state.pathParameters['uid']!),
-                child: JobsPage(uid: Provider.of<AuthBase>(context, listen: false).currentUser?.uid ?? ''))),
+              pageBuilder: (context, state)
+              {
+                final uid = Provider.of<AuthBase>(context, listen: false).currentUser?.uid ?? '';
+                return NoTransitionPage(
+                  child: Provider<Database?>(
+                      create: (_) =>
+                          FirestoreDatabase(uid:uid),
+                      child: JobsPage(uid: uid)));
+                },
               routes: [
                 GoRoute(
-                  path: 'details', //todo
-                  builder: (context, state) => const DetailsScreen(label: 'A'),
+                  path: 'edit',
+                  name: 'edit-job',
+                  pageBuilder: (context, state)
+                  {
+                    final job = state.extra as Job?;
+                    final uid = Provider.of<AuthBase>(context, listen: false).currentUser?.uid ?? '';
+                    return MaterialPage(
+                        fullscreenDialog: true,
+                        child: EditJobPage(database: FirestoreDatabase(uid: uid), job: job,));}
                 ),
               ],
             ),
