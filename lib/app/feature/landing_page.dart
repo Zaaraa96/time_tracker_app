@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker_app/app/feature/sign_in/screen/sign_in_page.dart';
-import 'package:time_tracker_app/services/auth.dart';
-import 'package:time_tracker_app/services/database.dart';
+import 'package:time_tracker_app/app/services/auth.dart';
+import 'package:time_tracker_app/app/services/database.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key, required this.databaseBuilder}) : super(key: key);

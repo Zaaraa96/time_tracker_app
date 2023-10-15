@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:rxdart/rxdart.dart';
-import 'package:time_tracker_app/services/database.dart';
+import 'package:time_tracker_app/app/services/database.dart';
 
 import '../../job_entries/model/format.dart';
 import '../../jobs/model/job.dart';

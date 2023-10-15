@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:time_tracker_app/services/auth.dart';
+import 'package:time_tracker_app/app/services/auth.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../model/email_sign_in_model.dart';

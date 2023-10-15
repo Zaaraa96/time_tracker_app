@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mockito/mockito.dart';
-import 'package:time_tracker_app/services/auth.dart';
-import 'package:time_tracker_app/services/database.dart';
+import 'package:time_tracker_app/app/services/auth.dart';
+import 'package:time_tracker_app/app/services/database.dart';
 
 class MockAuth extends Mock implements AuthBase {}
 class MockDatabase extends Mock implements Database {}

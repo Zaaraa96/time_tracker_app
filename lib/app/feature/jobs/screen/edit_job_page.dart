@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:time_tracker_app/common_widgets/show_alert_dialog.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
-import 'package:time_tracker_app/services/database.dart';
+import 'package:time_tracker_app/app/services/database.dart';
 
 import '../../../../navigation.dart';
 import '../model/job.dart';

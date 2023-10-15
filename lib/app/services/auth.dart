@@ -14,6 +14,10 @@ abstract class AuthBase {
 
   Future<User?> signInWithGoogle();
 
+  Future<void> sendResetPasswordEmail(String email);
+
+  Future<void> confirmResetPassword(String code, String newPassword);
+
   Future<void> signOut();
 }
 
@@ -48,6 +52,14 @@ class Auth implements AuthBase {
       password: password,
     );
     return userCredential.user;
+  }
+  @override
+  Future<void> sendResetPasswordEmail(String email) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+  @override
+  Future<void> confirmResetPassword(String code, String newPassword) async {
+    await _firebaseAuth.confirmPasswordReset(code: code, newPassword: newPassword);
   }
 
   @override

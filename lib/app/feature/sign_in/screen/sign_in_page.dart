@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:time_tracker_app/app/feature/sign_in/screen/sign_in_button.dart';
 import 'package:time_tracker_app/app/feature/sign_in/screen/social_sign_in_button.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
-import 'package:time_tracker_app/services/auth.dart';
+import 'package:time_tracker_app/app/services/auth.dart';
 
 import '../../../../navigation.dart';
 import '../bloc/sign_in_manager.dart';

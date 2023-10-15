@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:time_tracker_app/services/auth.dart';
-import 'package:time_tracker_app/services/database.dart';
+import 'package:time_tracker_app/app/services/auth.dart';
+import 'package:time_tracker_app/app/services/database.dart';
 import 'app/feature/account/screen/account_page.dart';
 import 'app/feature/entries/bloc/entries_bloc.dart';
 import 'app/feature/entries/screen/entries_page.dart';
@@ -166,8 +166,8 @@ final routers = GoRouter(
             GoRoute(
               path: '/account',
               name: account,
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: AccountPage(),
+              pageBuilder: (context, state) => NoTransitionPage(
+                child: AccountPage.create(context),
               ),
               routes: const [
               ],

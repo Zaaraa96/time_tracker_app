@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:time_tracker_app/services/auth.dart';
+import 'package:time_tracker_app/app/services/auth.dart';
 import '../bloc/validators.dart';
 import 'email_sign_in_model.dart';
 
