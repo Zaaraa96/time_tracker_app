@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker_app/routes.dart';
 import 'package:time_tracker_app/app/services/auth.dart';
@@ -9,11 +10,13 @@ import 'firebase_options.dart';
 //1.add all routes with go_router
 //2.put all navigation in one file
 //todo: 3.add locale support for farsi
-//todo: 4.add sign in with email and password and reset password in  account screen
+//4.add sign in with email and password and reset password in  account screen
 //5.make app feature first
 //todo: 6.add repository pattern
 //7.add icon for app done
 //todo: 8.test
+//todo: 9.build for web
+//todo: 10.update read me
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +36,15 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
       routerConfig: routers,
         title: 'Time Tracker',
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en'), // English
+          Locale('fa'), // farsi
+        ],
         theme: ThemeData(
           primarySwatch: Colors.indigo,
         ),
