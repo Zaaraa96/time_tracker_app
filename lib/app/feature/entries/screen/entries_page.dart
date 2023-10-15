@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../common_widgets/list_items_builder.dart';
+import '../../../../common_widgets/list_items_builder.dart';
 import '../bloc/entries_bloc.dart';
 import 'entries_list_tile.dart';
 

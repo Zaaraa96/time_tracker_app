@@ -1,12 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:time_tracker_app/app/jobs/model/job.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_app/services/database.dart';
-import '../../../navigation.dart';
+import '../../../../common_widgets/list_items_builder.dart';
+import '../../../../navigation.dart';
+import '../model/job.dart';
 import 'job_list_tile.dart';
-import '../../../common_widgets/list_items_builder.dart';
 
 class JobsPage extends StatelessWidget {
   const JobsPage({super.key, required this.uid});

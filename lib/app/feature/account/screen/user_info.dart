@@ -3,7 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../../common_widgets/avatar.dart';
+import '../../../../common_widgets/avatar.dart';
 
 class UserInfoWidget extends StatelessWidget {
   const UserInfoWidget({super.key, required this.user});

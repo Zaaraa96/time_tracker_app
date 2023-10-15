@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:time_tracker_app/common_widgets/input_dropdown.dart';
 
-import '../app/job_entries/model/format.dart';
+import '../app/feature/job_entries/model/format.dart';
 
 class DateTimePicker extends StatelessWidget {
   const DateTimePicker({

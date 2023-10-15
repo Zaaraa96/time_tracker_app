@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:time_tracker_app/app/jobs/model/job.dart';
+import '../model/job.dart';
 
 class JobListTile extends StatelessWidget {
   const JobListTile({Key? key, required this.job, this.onTap}) : super(key: key);

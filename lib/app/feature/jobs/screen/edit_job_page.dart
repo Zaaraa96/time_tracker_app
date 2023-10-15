@@ -1,12 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:time_tracker_app/app/jobs/model/job.dart';
 import 'package:time_tracker_app/common_widgets/show_alert_dialog.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_app/services/database.dart';
 
-import '../../../navigation.dart';
-
+import '../../../../navigation.dart';
+import '../model/job.dart';
 
 
 class EditJobPage extends StatefulWidget {
@@ -47,7 +46,7 @@ class _EditJobPageState extends State<EditJobPage> {
     if (_validateAndSaveForm()) {
       try {
         final jobs = await widget.database!.jobsStream().first;
-        final allNames = jobs.map((job) => job.name).toList();
+        final allNames = jobs.map((Job job) => job.name).toList();
         if (widget.job != null) {
           allNames.remove(widget.job!.name);
         }

@@ -1,8 +1,9 @@
-import 'package:meta/meta.dart';
-import 'package:time_tracker_app/app/entries/model/entry.dart';
-import 'package:time_tracker_app/app/jobs/model/job.dart';
+
 import 'package:time_tracker_app/services/api_path.dart';
 import 'package:time_tracker_app/services/firestore_service.dart';
+
+import '../app/feature/entries/model/entry.dart';
+import '../app/feature/jobs/model/job.dart';
 
 abstract class Database {
   Future<void> setJob(Job job);

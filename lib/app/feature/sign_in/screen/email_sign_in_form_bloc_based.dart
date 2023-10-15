@@ -1,13 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:time_tracker_app/app/sign_in/bloc/email_sign_in_bloc.dart';
-import 'package:time_tracker_app/app/sign_in/model/email_sign_in_model.dart';
 import 'package:time_tracker_app/common_widgets/form_submit_button.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_app/services/auth.dart';
-
-import '../../../navigation.dart';
+import '../../../../navigation.dart';
+import '../bloc/email_sign_in_bloc.dart';
+import '../model/email_sign_in_model.dart';
 
 class EmailSignInFormBlocBased extends StatefulWidget {
   const EmailSignInFormBlocBased({super.key, required this.bloc});

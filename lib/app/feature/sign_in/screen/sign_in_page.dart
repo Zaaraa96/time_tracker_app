@@ -1,13 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:time_tracker_app/app/sign_in/bloc/sign_in_manager.dart';
-import 'package:time_tracker_app/app/sign_in/screen/sign_in_button.dart';
-import 'package:time_tracker_app/app/sign_in/screen/social_sign_in_button.dart';
+import 'package:time_tracker_app/app/feature/sign_in/screen/sign_in_button.dart';
+import 'package:time_tracker_app/app/feature/sign_in/screen/social_sign_in_button.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_app/services/auth.dart';
 
-import '../../../navigation.dart';
+import '../../../../navigation.dart';
+import '../bloc/sign_in_manager.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({

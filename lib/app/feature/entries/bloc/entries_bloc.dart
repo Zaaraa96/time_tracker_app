@@ -1,11 +1,11 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:rxdart/rxdart.dart';
-import 'package:time_tracker_app/app/entries/model/entry.dart';
-import 'package:time_tracker_app/app/jobs/model/job.dart';
 import 'package:time_tracker_app/services/database.dart';
 
 import '../../job_entries/model/format.dart';
+import '../../jobs/model/job.dart';
 import '../model/daily_jobs_details.dart';
+import '../model/entry.dart';
 import '../screen/entries_list_tile.dart';
 import '../model/entry_job.dart';
 

@@ -1,27 +1,28 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'app/entries/model/entry.dart';
-import 'app/jobs/model/job.dart';
 
-//todo: add route names
-
+import 'app/feature/entries/model/entry.dart';
+import 'app/feature/jobs/model/job.dart';
+const editJob = 'editJob';
 void goToEditJob(BuildContext context, {Job? job}){
-  context.pushNamed('edit-job',extra: job);
+  context.pushNamed(editJob,extra: job);
 }
+const signIn = 'signIn';
 void goToSignIn(BuildContext context){
-  context.pushNamed('signIn');
+  context.pushNamed(signIn);
 }
+const landing= 'landing';
 void goToLanding(BuildContext context){
-  context.go('/');
+  context.goNamed(landing);
 }
-
+const jobs = 'jobs';
 void goToJobs(BuildContext context){
-  context.go('/jobs');
+  context.goNamed(jobs);
 }
-
+const jobEntries = 'jobEntries';
 void goToJobEntries(BuildContext context, {required Job job}){
-  context.goNamed('job-entries',extra: job);
+  context.goNamed(jobEntries,extra: job);
 }
 
 class EntryJobCombinedModel{
@@ -29,11 +30,14 @@ class EntryJobCombinedModel{
    Entry? entry;
 EntryJobCombinedModel({required this.job,required this.entry});
 }
-
+const jobEntry = 'jobEntry';
 void goToEntryPage(BuildContext context, {required Job? job, required Entry? entry}){
-  context.goNamed('job-entry',extra: EntryJobCombinedModel(job: job, entry: entry));
+  context.goNamed(jobEntry,extra: EntryJobCombinedModel(job: job, entry: entry));
 }
 
 void pop(BuildContext context){
   context.pop();
 }
+
+const account = 'account';
+const entries = 'entries';

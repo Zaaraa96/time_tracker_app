@@ -1,12 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:time_tracker_app/common_widgets/date_time_picker.dart';
-import 'package:time_tracker_app/app/entries/model/entry.dart';
-import 'package:time_tracker_app/app/jobs/model/job.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_app/services/database.dart';
-
-import '../../../navigation.dart';
+import '../../../../navigation.dart';
+import '../../entries/model/entry.dart';
+import '../../jobs/model/job.dart';
 import '../model/format.dart';
 
 class EntryPage extends StatefulWidget {
