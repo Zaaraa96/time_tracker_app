@@ -13,6 +13,10 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
+
+  bool? didRequestSignOut;
+
+
   Future<void> _signOut() async {
     try {
       final auth = Provider.of<AuthBase>(context, listen: false);
@@ -22,13 +26,19 @@ class _AccountPageState extends State<AccountPage> {
     }
   }
 
+  void setValueOfAlertDialog(bool? val){
+    setState(() {
+      didRequestSignOut = val;
+    });
+  }
+
   Future<void> _confirmSignOut() async {
-    final didRequestSignOut = await showAlertDialog(
+    await showAlertDialog(
       context,
       title: 'Logout',
       content: 'Are you sure that you want to logout?',
       cancelActionText: 'Cancel',
-      defaultActionText: 'Logout',
+      defaultActionText: 'Logout', onActionsPressed: setValueOfAlertDialog,
     );
     if (didRequestSignOut == true) {
       _signOut();

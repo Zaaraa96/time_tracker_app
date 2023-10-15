@@ -4,8 +4,16 @@ import 'package:go_router/go_router.dart';
 import 'app/entries/model/entry.dart';
 import 'app/jobs/model/job.dart';
 
+//todo: add route names
+
 void goToEditJob(BuildContext context, {Job? job}){
   context.pushNamed('edit-job',extra: job);
+}
+void goToSignIn(BuildContext context){
+  context.pushNamed('signIn');
+}
+void goToLanding(BuildContext context){
+  context.go('/');
 }
 
 void goToJobs(BuildContext context){

@@ -22,11 +22,14 @@ class _LandingPageState extends State<LandingPage> {
   @override
   void initState() {
     auth = Provider.of<AuthBase>(context, listen: false);
-    auth.authStateChanges().listen((User? user) {
-      if(user !=null) {
-        goToJobs(context);
-      }
-    });
+    // auth.authStateChanges().listen((User? user) {
+    //   if(user !=null) {
+    //     goToJobs(context);
+    //   }
+    //   else {
+    //     goToLanding(context);
+    //   }
+    // });
     super.initState();
   }
 

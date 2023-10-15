@@ -56,7 +56,7 @@ class _EditJobPageState extends State<EditJobPage> {
             context,
             title: 'Name already used',
             content: 'Please choose a different job name',
-            defaultActionText: 'OK',
+            defaultActionText: 'OK', onActionsPressed: (bool? value) {  },
           );
         } else {
           final id = widget.job?.id ?? documentIdFromCurrentDate();

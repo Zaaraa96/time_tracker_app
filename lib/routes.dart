@@ -1,4 +1,5 @@
 
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ import 'app/job_entries/screen/entry_page.dart';
 import 'app/job_entries/screen/job_entries_page.dart';
 import 'app/jobs/screen/edit_job_page.dart';
 import 'app/jobs/screen/jobs_page.dart';
+import 'app/sign_in/screen/email_sign_in_page.dart';
 import 'common_widgets/tab_item.dart';
 import 'app/landing_page.dart';
 import 'common_widgets/scaffold_with_nested_navigation.dart';
@@ -26,21 +28,47 @@ final _shellNavigatorAccountKey = GlobalKey<NavigatorState>(debugLabel: 'shellAc
 
 final routers = GoRouter(
   initialLocation: '/',
-  // * Passing a navigatorKey causes an issue on hot reload:
-  // * https://github.com/flutter/flutter/issues/113757#issuecomment-1518421380
-  // * However it's still necessary otherwise the navigator pops back to
-  // * root on hot reload
+
   navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
+  redirect: (context, state) {
+    final auth = Provider.of<AuthBase>(context, listen: false);
+    final path = state.uri.path;
+
+    final isLoggedIn = auth.currentUser != null;
+    if (isLoggedIn) {
+      if (path.startsWith('/sign-in') || path == '/') {
+        return '/jobs';
+      }
+    } else {
+      if (path.startsWith('/jobs') ||
+          path.startsWith('/entries') ||
+          path.startsWith('/account')) {
+        return '/';
+      }
+    }
+    return null;
+  },
+  refreshListenable: GoRouterRefreshStream(Auth().authStateChanges()),
   routes: [
-    // Stateful navigation based on:
-    // https://github.com/flutter/packages/blob/main/packages/go_router/example/lib/stateful_shell_route.dart
     GoRoute(path: '/',
+
     builder: (context, goRouteState){
       return LandingPage(
         databaseBuilder: (uid) => FirestoreDatabase(uid: uid),
       );
+    },
+    routes: [
+    GoRoute(
+    path: 'sign-in',
+    name: 'signIn',
+    pageBuilder: (context, state)
+    {
+      return MaterialPage(
+          fullscreenDialog: true,
+          child: EmailSignInPage());
     }
+),],
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
@@ -148,3 +176,20 @@ final routers = GoRouter(
     ),
   ],
 );
+
+class GoRouterRefreshStream extends ChangeNotifier {
+  GoRouterRefreshStream(Stream<dynamic> stream) {
+    notifyListeners();
+    _subscription = stream.asBroadcastStream().listen(
+          (dynamic _) => notifyListeners(),
+    );
+  }
+
+  late final StreamSubscription<dynamic> _subscription;
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
+}

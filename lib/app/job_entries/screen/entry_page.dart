@@ -15,16 +15,6 @@ class EntryPage extends StatefulWidget {
   final Job? job;
   final Entry? entry;
 
-  // static Future<void> show(
-  //     {required BuildContext context, Database? database, Job? job, Entry? entry}) async {
-  //   await Navigator.of(context, rootNavigator: true).push(
-  //     MaterialPageRoute(
-  //       builder: (context) =>
-  //           EntryPage(database: database, job: job, entry: entry),
-  //       fullscreenDialog: true,
-  //     ),
-  //   );
-  // }
 
   @override
   State<StatefulWidget> createState() => _EntryPageState();
@@ -90,7 +80,7 @@ class _EntryPageState extends State<EntryPage> {
           TextButton(
             child: Text(
               widget.entry != null ? 'Update' : 'Create',
-              style: TextStyle(fontSize: 18.0, color: Colors.white),
+              style: const TextStyle(fontSize: 18.0, color: Colors.white),
             ),
             onPressed: () => _setEntryAndDismiss(context),
           )
@@ -98,7 +88,7 @@ class _EntryPageState extends State<EntryPage> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,7 +134,7 @@ class _EntryPageState extends State<EntryPage> {
       children: <Widget>[
         Text(
           'Duration: $durationFormatted',
-          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+          style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -157,11 +147,11 @@ class _EntryPageState extends State<EntryPage> {
       keyboardType: TextInputType.text,
       maxLength: 50,
       controller: TextEditingController(text: _comment),
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         labelText: 'Comment',
         labelStyle: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
       ),
-      style: TextStyle(fontSize: 20.0, color: Colors.black),
+      style: const TextStyle(fontSize: 20.0, color: Colors.black),
       maxLines: null,
       onChanged: (comment) => _comment = comment,
     );

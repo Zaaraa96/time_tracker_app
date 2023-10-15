@@ -11,7 +11,7 @@ Future<void> showExceptionAlertDialog(
       context,
       title: title,
       content: _message(exception),
-      defaultActionText: 'OK',
+      defaultActionText: 'OK', onActionsPressed: (bool? value) {  },
     );
 
 String? _message(Exception exception) {

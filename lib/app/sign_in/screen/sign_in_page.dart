@@ -1,12 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:time_tracker_app/app/sign_in/screen/email_sign_in_page.dart';
 import 'package:time_tracker_app/app/sign_in/bloc/sign_in_manager.dart';
 import 'package:time_tracker_app/app/sign_in/screen/sign_in_button.dart';
 import 'package:time_tracker_app/app/sign_in/screen/social_sign_in_button.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_app/services/auth.dart';
+
+import '../../../navigation.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({
@@ -63,16 +64,6 @@ class SignInPage extends StatelessWidget {
     }
   }
 
-
-  void _signInWithEmail(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        fullscreenDialog: true,
-        builder: (context) => EmailSignInPage(),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,7 +103,7 @@ class SignInPage extends StatelessWidget {
             text: 'Sign in with email',
             textColor: Colors.white,
             color: Colors.teal[700],
-            onPressed: isLoading ? null : () => _signInWithEmail(context),
+            onPressed: isLoading ? null : () => goToSignIn(context),
           ),
           SizedBox(height: 8.0),
           Text(
