@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:time_tracker_app/routes.dart';
 import 'package:time_tracker_app/app/services/auth.dart';
 
+import 'app/services/change_language.dart';
 import 'common_widgets/tab_item.dart';
 import 'firebase_options.dart';
 
@@ -31,48 +32,46 @@ Future<void> main() async {
   );
   // turn off the # in the URLs on the web
   usePathUrlStrategy();
-  runApp(const MyApp());
+  AppLanguage appLanguage = AppLanguage();
+  await appLanguage.fetchLocale();
+  runApp(MyApp(appLanguage: appLanguage,));
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class MyApp extends StatelessWidget {
+  final AppLanguage appLanguage;
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-
-
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  const MyApp({super.key,required this.appLanguage});
 
   @override
   Widget build(BuildContext context) {
-    return Provider<AuthBase>(
-      create: (context) => Auth(),
-      child: MaterialApp.router(
-      routerConfig: routers,
-        title: AppLocalizations.of(context).translate('Time Tracker'),
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('en'), // English
-          Locale('fa'), // farsi
-        ],
-        theme: ThemeData(
-          primarySwatch: Colors.indigo,
-        ),
-        // home: LandingPage(
-        //   databaseBuilder: (uid) => FirestoreDatabase(uid: uid),
-        // ),
+    return ChangeNotifierProvider<AppLanguage>(
+      create: (_) => appLanguage,
+      child: Consumer<AppLanguage>(
+        builder: (context, model, child) {
+          return Provider<AuthBase>(
+            create: (context) => Auth(),
+            child: MaterialApp.router(
+              routerConfig: routers,
+              locale: model.appLocal,
+              title: AppLocalizations.of(context).translate('Time Tracker'),
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale('en'), // English
+                Locale('fa'), // farsi
+              ],
+              theme: ThemeData(
+                primarySwatch: Colors.indigo,
+              ),
+              // home: LandingPage(
+              //   databaseBuilder: (uid) => FirestoreDatabase(uid: uid),
+              // ),
+            ),
+          );}
       ),
     );
   }

@@ -3,10 +3,12 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"assets/AssetManifest.bin": "4e20524609e6d01e4d9b26aa7ed4e838",
-"assets/AssetManifest.json": "94d320779d7d9b9779cb868b61bb4968",
+const RESOURCES = {"assets/AssetManifest.bin": "446cb1029103632996cc0952602d9edf",
+"assets/AssetManifest.json": "b22ad14f6b62308a4c9e511e3560c8b8",
 "assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
 "assets/fonts/MaterialIcons-Regular.otf": "f0022de7b1a7d2f83bf6ff3c88edf475",
+"assets/i18n/en.json": "b2d4c0ba0ccadd3516cc7632ca58d2d2",
+"assets/i18n/fa.json": "f5ab76aacf66d9f1819bdcf018ee7797",
 "assets/images/2.0x/facebook-logo.png": "804cf2a905b2c7460adcaadb3dbfe9ae",
 "assets/images/2.0x/google-logo.png": "28b51fa69f1f0cb8a8f7a4bdd8e173c9",
 "assets/images/3.0x/facebook-logo.png": "d23205c8421608e83f9f7c420f3e2e89",
@@ -29,9 +31,9 @@ const RESOURCES = {"assets/AssetManifest.bin": "4e20524609e6d01e4d9b26aa7ed4e838
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "5ab3062e65dacbb74337f06456629395",
-"/": "5ab3062e65dacbb74337f06456629395",
-"main.dart.js": "47afadc8678b56031a5331854f0284ab",
+"index.html": "536f08fdbc4d9dddc72237769e362077",
+"/": "536f08fdbc4d9dddc72237769e362077",
+"main.dart.js": "d15b0b66175958957c0e4c15a41ea06d",
 "manifest.json": "3657bfb305e5074a4acb173dae88d455",
 "version.json": "14bd4940ff792f0f87c0cbb6ff16b01d"};
 // The application shell files that are downloaded before a service worker can
