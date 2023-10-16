@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_app/app/services/database.dart';
 import '../../../../common_widgets/list_items_builder.dart';
+import '../../../../localization.dart';
 import '../../../../navigation.dart';
 import '../../entries/model/entry.dart';
 import '../../jobs/model/job.dart';
@@ -20,7 +21,7 @@ class JobEntriesPage extends StatelessWidget {
     } on FirebaseException catch (e) {
       showExceptionAlertDialog(
         context,
-        title: 'Operation failed',
+        title: AppLocalizations.of(context).translate('Operation failed'),
         exception: e,
       );
     }

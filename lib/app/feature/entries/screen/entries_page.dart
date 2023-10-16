@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../common_widgets/list_items_builder.dart';
+import '../../../../localization.dart';
 import '../bloc/entries_bloc.dart';
 import 'entries_list_tile.dart';
 
@@ -11,7 +12,7 @@ class EntriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Entries'),
+        title: Text(AppLocalizations.of(context).translate('Entries')),
         elevation: 2.0,
       ),
       body: _buildContents(context),

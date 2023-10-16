@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:time_tracker_app/common_widgets/custom_raised_button.dart';
 import 'package:time_tracker_app/common_widgets/show_alert_dialog.dart';
 import 'package:time_tracker_app/app/services/auth.dart';
+import '../../../../localization.dart';
 import '../bloc/password_reset_bloc.dart';
 import '../model/password_reset_model.dart';
 import 'user_info.dart';
@@ -76,13 +77,13 @@ class _AccountPageState extends State<AccountPage> {
     final auth = Provider.of<AuthBase>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Account'),
+        title: Text(AppLocalizations.of(context).translate('Account')),
         actions: <Widget>[
           TextButton(
             onPressed: _confirmSignOut,
-            child: const Text(
-              'Logout',
-              style: TextStyle(
+            child:  Text(
+              AppLocalizations.of(context).translate('Logout'),
+              style: const TextStyle(
                 fontSize: 18.0,
                 color: Colors.white,
               ),
@@ -105,7 +106,7 @@ class _AccountPageState extends State<AccountPage> {
               return CircularProgressIndicator();
             if(model.submitted)
               return Container(
-                child: Text('password changed'),
+                child: Text(AppLocalizations.of(context).translate('password changed')),
               );
             if(model.showTextFields)
             return Padding(
@@ -118,14 +119,14 @@ class _AccountPageState extends State<AccountPage> {
                   _buildCodeTextField(model),
                   SizedBox(height: 16.0),
 
-                  CustomRaisedButton(onPressed: submit,child: Text('confirm reset password'),),
+                  CustomRaisedButton(onPressed: submit,child: Text(AppLocalizations.of(context).translate('confirm reset password')),),
                 ],
               ),
             );
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomRaisedButton(onPressed: askToResetPassword,child: Text('reset password'),),
+                CustomRaisedButton(onPressed: askToResetPassword,child: Text(AppLocalizations.of(context).translate('reset password')),),
               ],
             );
           }
@@ -138,7 +139,7 @@ class _AccountPageState extends State<AccountPage> {
       controller: _passwordController,
       focusNode: _passwordFocusNode,
       decoration: InputDecoration(
-        labelText: 'Password',
+        labelText: AppLocalizations.of(context).translate('Password'),
         errorText: model.passwordErrorText,
         enabled: model.isLoading == false,
       ),
@@ -162,7 +163,7 @@ class _AccountPageState extends State<AccountPage> {
       controller: _codeController,
       focusNode: _codeFocusNode,
       decoration: InputDecoration(
-        labelText: 'Code',
+        labelText: AppLocalizations.of(context).translate('Code'),
         hintText: '123456',
         errorText: model.codeErrorText,
         enabled: model.isLoading == false,
@@ -181,8 +182,9 @@ class _AccountPageState extends State<AccountPage> {
       await widget.bloc.sendCode();
       showAlertDialog(
         context,
-        title: 'verification code sent!',
-         content: 'the code has been sent to your email', defaultActionText: 'ok', onActionsPressed: (bool? value) {  },
+        title: AppLocalizations.of(context).translate('verification code sent!'),
+         content: AppLocalizations.of(context).translate('the code has been sent to your email'),
+        defaultActionText: AppLocalizations.of(context).translate('ok'), onActionsPressed: (bool? value) {  },
       );
     } catch (e) {
       print(e.toString());

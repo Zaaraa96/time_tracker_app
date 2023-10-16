@@ -64,14 +64,15 @@ class Auth implements AuthBase {
   }
 
   GoogleSignIn getGoogleSignIn(){
-    if(kIsWeb)
-    return GoogleSignIn( clientId: '719819794534-ls3tmln5hd3nd34k13qo8blslcdg3ha0.apps.googleusercontent.com',
+    if(kIsWeb) {
+      return GoogleSignIn( clientId: '719819794534-ls3tmln5hd3nd34k13qo8blslcdg3ha0.apps.googleusercontent.com',
         scopes: [
           'email', 'profile', 'openid',
           'https://www.googleapis.com/auth/userinfo.profile',
           'https://www.googleapis.com/auth/userinfo.email'
         ]
     );
+    }
     return GoogleSignIn(
         scopes: [
           'profile',

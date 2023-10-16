@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker_app/app/feature/sign_in/screen/sign_in_button.dart';
 import 'package:time_tracker_app/app/feature/sign_in/screen/social_sign_in_button.dart';
-import 'google_sign_in_button/google_sign_in_button.dart';
+import '../../../../localization.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_app/app/services/auth.dart';
 
@@ -62,8 +62,7 @@ class SignInPage extends StatelessWidget {
     try {
       await manager.signInWithGoogle();
     } on Exception catch (e) {
-      print(e);
-      // _showSignInError(context, e);
+      _showSignInError(context, e);
     }
   }
 
@@ -71,7 +70,7 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Time Tracker'),
+        title: Text(AppLocalizations.of(context).translate('Time Tracker')),
         elevation: 2.0,
       ),
       body: _buildContent(context),
@@ -88,7 +87,7 @@ class SignInPage extends StatelessWidget {
         children: <Widget>[
           SizedBox(
             height: 50.0,
-            child: _buildHeader(),
+            child: _buildHeader(context),
           ),
           SizedBox(height: 48.0),
 
@@ -99,7 +98,7 @@ class SignInPage extends StatelessWidget {
           if(!kIsWeb)
           SocialSignInButton(
             assetName: 'images/google-logo.png',
-            text: 'Sign in with Google',
+            text: AppLocalizations.of(context).translate('Sign in with Google'),
             textColor: Colors.black87,
             color: Colors.white,
             onPressed: isLoading ? null : () => _signInWithGoogle(context),
@@ -109,20 +108,20 @@ class SignInPage extends StatelessWidget {
           SizedBox(height: 8.0),
           SignInButton(
             key: emailPasswordKey,
-            text: 'Sign in with email',
+            text: AppLocalizations.of(context).translate('Sign in with email'),
             textColor: Colors.white,
             color: Colors.teal[700],
             onPressed: isLoading ? null : () => goToSignIn(context),
           ),
           SizedBox(height: 8.0),
           Text(
-            'or',
+            AppLocalizations.of(context).translate('or'),
             style: TextStyle(fontSize: 14.0, color: Colors.black87),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 8.0),
           SignInButton(
-            text: 'Go anonymous',
+            text: AppLocalizations.of(context).translate('Go anonymous'),
             textColor: Colors.black,
             color: Colors.lime[300],
             onPressed: isLoading ? null : () => _signInAnonymously(context),
@@ -132,14 +131,14 @@ class SignInPage extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     if (isLoading) {
       return Center(
         child: CircularProgressIndicator(),
       );
     }
     return Text(
-      'Sign in',
+      AppLocalizations.of(context).translate('Sign in'),
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: 32.0,

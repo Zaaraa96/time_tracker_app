@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:time_tracker_app/common_widgets/form_submit_button.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_app/app/services/auth.dart';
+import '../../../../localization.dart';
 import '../../../../navigation.dart';
 import '../bloc/email_sign_in_bloc.dart';
 import '../model/email_sign_in_model.dart';
@@ -50,7 +51,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
     } on FirebaseAuthException catch (e) {
       showExceptionAlertDialog(
         context,
-        title: 'Sign in failed',
+        title: AppLocalizations.of(context).translate('Sign in failed'),
         exception: e,
       );
     }
@@ -92,7 +93,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
       controller: _passwordController,
       focusNode: _passwordFocusNode,
       decoration: InputDecoration(
-        labelText: 'Password',
+        labelText: AppLocalizations.of(context).translate('Password'),
         errorText: model.passwordErrorText,
         enabled: model.isLoading == false,
       ),
@@ -108,7 +109,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
       controller: _emailController,
       focusNode: _emailFocusNode,
       decoration: InputDecoration(
-        labelText: 'Email',
+        labelText: AppLocalizations.of(context).translate('Email'),
         hintText: 'test@test.com',
         errorText: model.emailErrorText,
         enabled: model.isLoading == false,

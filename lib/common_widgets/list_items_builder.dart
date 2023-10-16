@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../localization.dart';
 import 'empty_content.dart';
 
 typedef ItemWidgetBuilder<T> = Widget Function(BuildContext context, T item);
@@ -23,8 +24,8 @@ class ListItemsBuilder<T> extends StatelessWidget {
       }
     } else if (snapshot.hasError) {
       return EmptyContent(
-        title: 'Something went wrong',
-        message: 'Can\'t load items right now',
+        title: AppLocalizations.of(context).translate('Something went wrong'),
+        message: AppLocalizations.of(context).translate('Can\'t load items right now'),
       );
     }
     return Center(child: CircularProgressIndicator());

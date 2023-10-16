@@ -18,6 +18,7 @@ import 'app/feature/sign_in/screen/email_sign_in_page.dart';
 import 'common_widgets/tab_item.dart';
 import 'app/feature/landing_page.dart';
 import 'common_widgets/scaffold_with_nested_navigation.dart';
+import 'localization.dart';
 import 'navigation.dart';
 
 // private navigators
@@ -72,6 +73,11 @@ final routers = GoRouter(
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
+        TabItemData.allTabs = {
+          TabItem.jobs: TabItemData(title: AppLocalizations.of(context).translate('Jobs'), icon: Icons.work),
+          TabItem.entries: TabItemData(title: AppLocalizations.of(context).translate('Entries'), icon: Icons.view_headline),
+          TabItem.account: TabItemData(title: AppLocalizations.of(context).translate('Account'), icon: Icons.person),
+        };
         return ScaffoldWithNestedNavigation(navigationShell: navigationShell,
           navigationRailDestinations: TabItemData.buildRainNavigationDestination(),
           navigationDestinations: TabItemData.buildNavigationDestination(),);

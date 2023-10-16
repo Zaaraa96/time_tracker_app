@@ -4,6 +4,7 @@ import 'package:time_tracker_app/common_widgets/show_alert_dialog.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_app/app/services/database.dart';
 
+import '../../../../localization.dart';
 import '../../../../navigation.dart';
 import '../model/job.dart';
 
@@ -53,9 +54,9 @@ class _EditJobPageState extends State<EditJobPage> {
         if (allNames.contains(_name)) {
           showAlertDialog(
             context,
-            title: 'Name already used',
-            content: 'Please choose a different job name',
-            defaultActionText: 'OK', onActionsPressed: (bool? value) {  },
+            title: AppLocalizations.of(context).translate('Name already used'),
+            content: AppLocalizations.of(context).translate('Please choose a different job name'),
+            defaultActionText: AppLocalizations.of(context).translate('OK'), onActionsPressed: (bool? value) {  },
           );
         } else {
           final id = widget.job?.id ?? documentIdFromCurrentDate();
@@ -66,7 +67,7 @@ class _EditJobPageState extends State<EditJobPage> {
       } on FirebaseException catch (e) {
         showExceptionAlertDialog(
           context,
-          title: 'Operation failed',
+          title: AppLocalizations.of(context).translate('Operation failed'),
           exception: e,
         );
       }
@@ -78,14 +79,14 @@ class _EditJobPageState extends State<EditJobPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 2.0,
-        title: Text(widget.job == null ? 'New Job' : 'Edit Job'),
+        title: Text(widget.job == null ? AppLocalizations.of(context).translate('New Job') : AppLocalizations.of(context).translate('Edit Job')),
         actions: <Widget>[
           TextButton(
-            child: Text(
-              'Save',
-              style: TextStyle(fontSize: 18, color: Colors.white),
-            ),
             onPressed: _submit,
+            child: Text(
+              AppLocalizations.of(context).translate('Save'),
+              style: const TextStyle(fontSize: 18, color: Colors.white),
+            ),
           ),
         ],
       ),
@@ -121,13 +122,13 @@ class _EditJobPageState extends State<EditJobPage> {
   List<Widget> _buildFormChildren() {
     return [
       TextFormField(
-        decoration: InputDecoration(labelText: 'Job name'),
+        decoration: InputDecoration(labelText: AppLocalizations.of(context).translate('Job name')),
         initialValue: _name,
-        validator: (value) => value!.isNotEmpty ? null : 'Name can\'t be empty',
+        validator: (value) => value!.isNotEmpty ? null : AppLocalizations.of(context).translate('Name can\'t be empty'),
         onSaved: (value) => _name = value,
       ),
       TextFormField(
-        decoration: InputDecoration(labelText: 'Rate per hour'),
+        decoration: InputDecoration(labelText: AppLocalizations.of(context).translate('Rate per hour')),
         initialValue: _ratePerHour != null ? '$_ratePerHour' : null,
         keyboardType: TextInputType.numberWithOptions(
           signed: false,

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../localization.dart';
+
 class EmptyContent extends StatelessWidget {
   const EmptyContent({
     Key? key,
-    this.title = 'Nothing here',
-    this.message = 'Add a new item to get started',
+    this.title,
+    this.message,
   }) : super(key: key);
-  final String title;
-  final String message;
+  final String? title;
+  final String? message;
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +18,11 @@ class EmptyContent extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            title,
+            title ?? AppLocalizations.of(context).translate('Nothing here'),
             style: TextStyle(fontSize: 32.0, color: Colors.black54),
           ),
           Text(
-            message,
+            message ?? AppLocalizations.of(context).translate('Add a new item to get started'),
             style: TextStyle(fontSize: 16.0, color: Colors.black54),
           ),
         ],

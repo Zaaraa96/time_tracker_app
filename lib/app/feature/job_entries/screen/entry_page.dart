@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:time_tracker_app/common_widgets/date_time_picker.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_app/app/services/database.dart';
+import '../../../../localization.dart';
 import '../../../../navigation.dart';
 import '../../entries/model/entry.dart';
 import '../../jobs/model/job.dart';
@@ -63,7 +64,7 @@ class _EntryPageState extends State<EntryPage> {
     } on FirebaseException catch (e) {
       showExceptionAlertDialog(
         context,
-        title: 'Operation failed',
+        title: AppLocalizations.of(context).translate('Operation failed'),
         exception: e,
       );
     }
@@ -78,7 +79,7 @@ class _EntryPageState extends State<EntryPage> {
         actions: <Widget>[
           TextButton(
             child: Text(
-              widget.entry != null ? 'Update' : 'Create',
+              widget.entry != null ? AppLocalizations.of(context).translate('Update') : AppLocalizations.of(context).translate('Create'),
               style: const TextStyle(fontSize: 18.0, color: Colors.white),
             ),
             onPressed: () => _setEntryAndDismiss(context),
@@ -107,7 +108,7 @@ class _EntryPageState extends State<EntryPage> {
 
   Widget _buildStartDate() {
     return DateTimePicker(
-      labelText: 'Start',
+      labelText: AppLocalizations.of(context).translate('Start'),
       selectedDate: _startDate,
       selectedTime: _startTime,
       onSelectedDate: (date) => setState(() => _startDate = date),
@@ -117,7 +118,7 @@ class _EntryPageState extends State<EntryPage> {
 
   Widget _buildEndDate() {
     return DateTimePicker(
-      labelText: 'End',
+      labelText: AppLocalizations.of(context).translate('End'),
       selectedDate: _endDate,
       selectedTime: _endTime,
       onSelectedDate: (date) => setState(() => _endDate = date),
@@ -132,7 +133,7 @@ class _EntryPageState extends State<EntryPage> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         Text(
-          'Duration: $durationFormatted',
+          '${AppLocalizations.of(context).translate('Duration')}: $durationFormatted',
           style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
@@ -146,9 +147,9 @@ class _EntryPageState extends State<EntryPage> {
       keyboardType: TextInputType.text,
       maxLength: 50,
       controller: TextEditingController(text: _comment),
-      decoration: const InputDecoration(
-        labelText: 'Comment',
-        labelStyle: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+      decoration:  InputDecoration(
+        labelText: AppLocalizations.of(context).translate('Comment'),
+        labelStyle: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
       ),
       style: const TextStyle(fontSize: 20.0, color: Colors.black),
       maxLines: null,

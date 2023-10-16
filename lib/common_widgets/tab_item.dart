@@ -9,10 +9,10 @@ class TabItemData {
   final String title;
   final IconData icon;
 
-  static const Map<TabItem, TabItemData> allTabs = {
-    TabItem.jobs: TabItemData(title: 'Jobs', icon: Icons.work),
-    TabItem.entries: TabItemData(title: 'Entries', icon: Icons.view_headline),
-    TabItem.account: TabItemData(title: 'Account', icon: Icons.person),
+  static Map<TabItem, TabItemData> allTabs = {
+    TabItem.jobs: const TabItemData(title: 'Jobs', icon: Icons.work),
+    TabItem.entries: const TabItemData(title: 'Entries', icon: Icons.view_headline),
+    TabItem.account: const TabItemData(title: 'Account', icon: Icons.person),
   };
 
   static  NavigationDestination _buildItem(TabItemData tabItem) {

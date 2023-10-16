@@ -5,10 +5,13 @@ import 'package:provider/provider.dart';
 import 'package:time_tracker_app/routes.dart';
 import 'package:time_tracker_app/app/services/auth.dart';
 
+import 'common_widgets/tab_item.dart';
 import 'firebase_options.dart';
 
 // ignore:depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart';
+
+import 'localization.dart';
 
 //1.add all routes with go_router
 //2.put all navigation in one file
@@ -18,7 +21,7 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 //todo: 6.add repository pattern
 //7.add icon for app done
 //todo: 8.test
-//todo: 9.build for web
+//9.build for web
 //todo: 10.update read me
 
 Future<void> main() async {
@@ -31,8 +34,21 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +56,9 @@ class MyApp extends StatelessWidget {
       create: (context) => Auth(),
       child: MaterialApp.router(
       routerConfig: routers,
-        title: 'Time Tracker',
+        title: AppLocalizations.of(context).translate('Time Tracker'),
         localizationsDelegates: const [
+          AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
