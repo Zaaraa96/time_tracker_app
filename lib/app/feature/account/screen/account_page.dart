@@ -91,7 +91,7 @@ class _AccountPageState extends State<AccountPage> {
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(130),
-          child: UserInfoWidget(user: auth.currentUser!,),
+          child: auth.currentUser!=null? UserInfoWidget(user: auth.currentUser!,) : Container(),
         ),
       ),
       body: Center(

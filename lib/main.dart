@@ -7,6 +7,9 @@ import 'package:time_tracker_app/app/services/auth.dart';
 
 import 'firebase_options.dart';
 
+// ignore:depend_on_referenced_packages
+import 'package:flutter_web_plugins/url_strategy.dart';
+
 //1.add all routes with go_router
 //2.put all navigation in one file
 //todo: 3.add locale support for farsi
@@ -23,6 +26,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // turn off the # in the URLs on the web
+  usePathUrlStrategy();
   runApp(const MyApp());
 }
 

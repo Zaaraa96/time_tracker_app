@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../navigation.dart';
@@ -21,7 +22,7 @@ Future<void> showAlertDialog(
     onActionsPressed(true);
     pop(context);
   }
-  if (!Platform.isIOS) {
+  if (kIsWeb || !Platform.isIOS) {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(

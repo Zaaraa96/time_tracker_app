@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker_app/app/feature/sign_in/screen/sign_in_button.dart';
 import 'package:time_tracker_app/app/feature/sign_in/screen/social_sign_in_button.dart';
+import 'google_sign_in_button/google_sign_in_button.dart';
 import 'package:time_tracker_app/common_widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker_app/app/services/auth.dart';
 
@@ -60,7 +62,8 @@ class SignInPage extends StatelessWidget {
     try {
       await manager.signInWithGoogle();
     } on Exception catch (e) {
-      _showSignInError(context, e);
+      print(e);
+      // _showSignInError(context, e);
     }
   }
 
@@ -88,6 +91,12 @@ class SignInPage extends StatelessWidget {
             child: _buildHeader(),
           ),
           SizedBox(height: 48.0),
+
+
+          // buildSignInButton(
+          //   onPressed: isLoading ? null : () => _signInWithGoogle(context),
+          // ),
+          if(!kIsWeb)
           SocialSignInButton(
             assetName: 'images/google-logo.png',
             text: 'Sign in with Google',

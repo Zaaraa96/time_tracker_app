@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 abstract class AuthBase {
@@ -62,9 +63,26 @@ class Auth implements AuthBase {
     await _firebaseAuth.confirmPasswordReset(code: code, newPassword: newPassword);
   }
 
+  GoogleSignIn getGoogleSignIn(){
+    if(kIsWeb)
+    return GoogleSignIn( clientId: '719819794534-ls3tmln5hd3nd34k13qo8blslcdg3ha0.apps.googleusercontent.com',
+        scopes: [
+          'email', 'profile', 'openid',
+          'https://www.googleapis.com/auth/userinfo.profile',
+          'https://www.googleapis.com/auth/userinfo.email'
+        ]
+    );
+    return GoogleSignIn(
+        scopes: [
+          'profile',
+          'email'
+        ]
+    );
+  }
+
   @override
   Future<User?> signInWithGoogle() async {
-    final googleSignIn = GoogleSignIn();
+    final googleSignIn = getGoogleSignIn();
     final googleUser = await googleSignIn.signIn();
     if (googleUser != null) {
       final googleAuth = await googleUser.authentication;
@@ -92,7 +110,7 @@ class Auth implements AuthBase {
 
   @override
   Future<void> signOut() async {
-    final googleSignIn = GoogleSignIn();
+    final googleSignIn = getGoogleSignIn();
     await googleSignIn.signOut();
     await _firebaseAuth.signOut();
   }
