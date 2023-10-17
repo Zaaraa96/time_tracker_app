@@ -4,9 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker_app/routes.dart';
 import 'package:time_tracker_app/app/services/auth.dart';
-
 import 'app/services/change_language.dart';
-import 'common_widgets/tab_item.dart';
 import 'firebase_options.dart';
 
 // ignore:depend_on_referenced_packages
@@ -16,14 +14,13 @@ import 'localization.dart';
 
 //1.add all routes with go_router
 //2.put all navigation in one file
-//todo: 3.add locale support for farsi
+//3.add locale support for farsi
 //4.add sign in with email and password and reset password in  account screen
 //5.make app feature first
 //todo: 6.add repository pattern
 //7.add icon for app done
 //todo: 8.test
 //9.build for web
-//todo: 10.update read me
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
