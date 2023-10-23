@@ -28,7 +28,7 @@ final _shellNavigatorJobKey = GlobalKey<NavigatorState>(debugLabel: 'shellJob');
 final _shellNavigatorEntriesKey = GlobalKey<NavigatorState>(debugLabel: 'shellEntries');
 final _shellNavigatorAccountKey = GlobalKey<NavigatorState>(debugLabel: 'shellAccount');
 
-GoRouter routers(AuthBase auth) => GoRouter(
+GoRouter routers(AuthBase auth, Database database) => GoRouter(
   initialLocation: '/',
 
   navigatorKey: _rootNavigatorKey,
@@ -90,12 +90,8 @@ GoRouter routers(AuthBase auth) => GoRouter(
               name: jobs,
               pageBuilder: (context, state)
               {
-                final uid = auth.currentUser?.uid ?? '';
-                return NoTransitionPage(
-                  child: Provider<Database>(
-                      create: (_) =>
-                          FirestoreDatabase(uid:uid),
-                      child: JobsPage(uid: uid)));
+                return  NoTransitionPage(child: Provider<Database>(
+                    builder: (context, _) => const JobsPage(), create: (context) => database, ));
                 },
               routes: [
                 GoRoute(
@@ -104,10 +100,9 @@ GoRouter routers(AuthBase auth) => GoRouter(
                   pageBuilder: (context, state)
                   {
                     final job = state.extra as Job?;
-                    final uid = auth.currentUser?.uid ?? '';
                     return MaterialPage(
                         fullscreenDialog: true,
-                        child: EditJobPage(database: FirestoreDatabase(uid: uid), job: job,));}
+                        child: EditJobPage(database: database, job: job,));}
                 ),
                 GoRoute(
                   path: 'entry',
@@ -115,9 +110,8 @@ GoRouter routers(AuthBase auth) => GoRouter(
                   pageBuilder: (context, state)
                   {
                     final entryJob = state.extra as EntryJobCombinedModel;
-                    final uid = auth.currentUser?.uid ?? '';
                     return  MaterialPage(
-                      child: EntryPage(database: FirestoreDatabase(uid: uid), job: entryJob.job, entry: entryJob.entry),
+                      child: EntryPage(database: database, job: entryJob.job, entry: entryJob.entry),
                       fullscreenDialog: true,
                     );}
                 ),
@@ -127,11 +121,10 @@ GoRouter routers(AuthBase auth) => GoRouter(
                   pageBuilder: (context, state)
                   {
                     final job = state.extra as Job;
-                    final uid = auth.currentUser?.uid ?? '';
                     return
                       CupertinoPage(
                         fullscreenDialog: false,
-                        child: JobEntriesPage(database: FirestoreDatabase(uid: uid), job: job),
+                        child: JobEntriesPage(database: database, job: job),
                       );
                   }
                 ),
@@ -147,20 +140,15 @@ GoRouter routers(AuthBase auth) => GoRouter(
               name: entries,
               pageBuilder: (context, state)
               {
-                final uid = auth.currentUser?.uid ?? '';
+
                 return NoTransitionPage(
                   child: Provider<Database>(
-                    create: (_) =>
-                        FirestoreDatabase(uid: uid),
-                    child: Consumer<Database>(
-                      builder: (BuildContext context, value, Widget? child) {
-                        return Provider<EntriesBloc>(
-                          create: (_) => EntriesBloc(database: value),
-                          child: const EntriesPage(),
-                        );
-                      },
-                    ),
-                  ));},
+                    create:(context) => database,
+                    child: Provider<EntriesBloc>(
+                            create: (_) => EntriesBloc(database: database),
+                            child: const EntriesPage()),
+                  ));
+              },
               routes: const [],
             ),
           ],

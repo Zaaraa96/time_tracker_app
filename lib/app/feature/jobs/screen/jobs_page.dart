@@ -10,8 +10,7 @@ import '../model/job.dart';
 import 'job_list_tile.dart';
 
 class JobsPage extends StatelessWidget {
-  const JobsPage({super.key, required this.uid});
-  final String uid;
+  const JobsPage({super.key});
 
 
   Future<void> _delete(BuildContext context, Job job) async {
@@ -45,7 +44,7 @@ class JobsPage extends StatelessWidget {
 
   Widget _buildContents(BuildContext context) {
     return StreamBuilder<List<Job>>(
-      stream: FirestoreDatabase(uid: uid).jobsStream(),
+      stream: Provider.of<Database>(context, listen: false).jobsStream(),
       builder: (context, snapshot) {
         return ListItemsBuilder<Job>(
           snapshot: snapshot,

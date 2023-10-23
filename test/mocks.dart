@@ -5,7 +5,7 @@ import 'package:time_tracker_app/app/services/auth.dart';
 import 'package:time_tracker_app/app/services/database.dart';
 
 // class MockAuth extends Mock implements AuthBase {}
-class MockDatabase extends Mock implements Database {}
+// class MockDatabase extends Mock implements Database {}
 // class MockUser extends Mock implements User {
 //   MockUser();
 //   factory MockUser.uid(String uid) {

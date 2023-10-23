@@ -9,7 +9,10 @@ import 'package:firebase_auth/firebase_auth.dart' as _i2;
 import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart'
     as _i5;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:time_tracker_app/app/feature/entries/model/entry.dart' as _i8;
+import 'package:time_tracker_app/app/feature/jobs/model/job.dart' as _i7;
 import 'package:time_tracker_app/app/services/auth.dart' as _i3;
+import 'package:time_tracker_app/app/services/database.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -632,4 +635,83 @@ class MockUser extends _i1.Mock implements _i2.User {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+}
+
+/// A class which mocks [Database].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockDatabase extends _i1.Mock implements _i6.Database {
+  @override
+  _i4.Future<void> setJob(_i7.Job? job) => (super.noSuchMethod(
+        Invocation.method(
+          #setJob,
+          [job],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> deleteJob(_i7.Job? job) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteJob,
+          [job],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+
+  @override
+  _i4.Stream<List<_i7.Job>> jobsStream() => (super.noSuchMethod(
+        Invocation.method(
+          #jobsStream,
+          [],
+        ),
+        returnValue: _i4.Stream<List<_i7.Job>>.empty(),
+        returnValueForMissingStub: _i4.Stream<List<_i7.Job>>.empty(),
+      ) as _i4.Stream<List<_i7.Job>>);
+
+  @override
+  _i4.Stream<_i7.Job> jobStream({required String? jobId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #jobStream,
+          [],
+          {#jobId: jobId},
+        ),
+        returnValue: _i4.Stream<_i7.Job>.empty(),
+        returnValueForMissingStub: _i4.Stream<_i7.Job>.empty(),
+      ) as _i4.Stream<_i7.Job>);
+
+  @override
+  _i4.Future<void> setEntry(_i8.Entry? entry) => (super.noSuchMethod(
+        Invocation.method(
+          #setEntry,
+          [entry],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> deleteEntry(_i8.Entry? entry) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteEntry,
+          [entry],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+
+  @override
+  _i4.Stream<List<_i8.Entry>> entriesStream({_i7.Job? job}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #entriesStream,
+          [],
+          {#job: job},
+        ),
+        returnValue: _i4.Stream<List<_i8.Entry>>.empty(),
+        returnValueForMissingStub: _i4.Stream<List<_i8.Entry>>.empty(),
+      ) as _i4.Stream<List<_i8.Entry>>);
 }

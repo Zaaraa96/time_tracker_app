@@ -6,13 +6,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
+import 'package:time_tracker_app/app/feature/jobs/model/job.dart';
 import 'package:time_tracker_app/app/feature/jobs/screen/jobs_page.dart';
 import 'package:time_tracker_app/app/feature/sign_in/screen/sign_in_page.dart';
 import 'package:time_tracker_app/app/services/auth.dart';
+import 'package:time_tracker_app/app/services/database.dart';
 import 'package:time_tracker_app/routes.dart';
 
 import 'mocks.dart';
-@GenerateNiceMocks([MockSpec<AuthBase>(), MockSpec<User>()])
+@GenerateNiceMocks([MockSpec<AuthBase>(), MockSpec<User>(), MockSpec<Database>()])
 import 'landing_page_test.mocks.dart';
 
 void main() {
@@ -37,7 +39,7 @@ void main() {
         child: Consumer<AuthBase>(
           builder: (BuildContext context, AuthBase auth, Widget? child) {
            return MaterialApp.router(
-              routerConfig: routers(auth),
+              routerConfig: routers(auth, mockDatabase),
               // home: LandingPage(
               //   databaseBuilder: (_) => mockDatabase,
               // ),
@@ -80,10 +82,12 @@ void main() {
   testWidgets('non-null user', (WidgetTester tester) async {
     when(MockUser().uid).thenReturn('123');
 
+    when( mockAuth.currentUser).thenReturn(MockUser());
+    when(mockDatabase.jobsStream()).thenAnswer((_)=>Stream<List<Job>>.fromFutures([]));
+
     stubOnAuthStateChangedYields([MockUser()]);
 
     await pumpLandingPage(tester);
-    await tester.pumpAndSettle();
 
     expect(find.byType(JobsPage), findsOneWidget);
   });

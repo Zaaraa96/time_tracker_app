@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:time_tracker_app/routes.dart';
 import 'package:time_tracker_app/app/services/auth.dart';
 import 'app/services/change_language.dart';
+import 'app/services/database.dart';
 import 'firebase_options.dart';
 
 // ignore:depend_on_referenced_packages
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
             child: Consumer<AuthBase>(
               builder: (BuildContext context, AuthBase auth, Widget? child) {
                 return MaterialApp.router(
-                  routerConfig: routers(auth),
+                  routerConfig: routers(auth , FirestoreDatabase(uid: auth.currentUser!.uid)),
                   locale: model.appLocal,
                   title: AppLocalizations.of(context).translate('Time Tracker'),
                   localizationsDelegates: const [
