@@ -47,26 +47,30 @@ class MyApp extends StatelessWidget {
         builder: (context, model, child) {
           return Provider<AuthBase>(
             create: (context) => Auth(),
-            child: MaterialApp.router(
-              routerConfig: routers,
-              locale: model.appLocal,
-              title: AppLocalizations.of(context).translate('Time Tracker'),
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: const [
-                Locale('en'), // English
-                Locale('fa'), // farsi
-              ],
-              theme: ThemeData(
-                primarySwatch: Colors.indigo,
-              ),
-              // home: LandingPage(
-              //   databaseBuilder: (uid) => FirestoreDatabase(uid: uid),
-              // ),
+            child: Consumer<AuthBase>(
+              builder: (BuildContext context, AuthBase auth, Widget? child) {
+                return MaterialApp.router(
+                  routerConfig: routers(auth),
+                  locale: model.appLocal,
+                  title: AppLocalizations.of(context).translate('Time Tracker'),
+                  localizationsDelegates: const [
+                    AppLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: const [
+                    Locale('en'), // English
+                    Locale('fa'), // farsi
+                  ],
+                  theme: ThemeData(
+                    primarySwatch: Colors.indigo,
+                  ),
+                  // home: LandingPage(
+                  //   databaseBuilder: (uid) => FirestoreDatabase(uid: uid),
+                  // ),
+                );
+              },
             ),
           );}
       ),

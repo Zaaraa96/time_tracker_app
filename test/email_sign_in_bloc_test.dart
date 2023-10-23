@@ -1,17 +1,21 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:time_tracker_app/app/sign_in/bloc/email_sign_in_bloc.dart';
-import 'package:time_tracker_app/app/sign_in/model/email_sign_in_model.dart';
+import 'package:time_tracker_app/app/feature/sign_in/bloc/email_sign_in_bloc.dart';
+import 'package:time_tracker_app/app/feature/sign_in/model/email_sign_in_model.dart';
+import 'package:mockito/annotations.dart';
+import 'package:time_tracker_app/app/services/auth.dart';
 
-import 'mocks.dart';
+
+@GenerateNiceMocks([MockSpec<AuthBase>()])
+import 'email_sign_in_bloc_test.mocks.dart';
 
 void main() {
-  MockAuth? mockAuth;
+  late MockAuthBase mockAuth;
   late EmailSignInBloc bloc;
 
   setUp(() {
-    mockAuth = MockAuth();
+    mockAuth = MockAuthBase();
     bloc = EmailSignInBloc(auth: mockAuth);
   });
 
@@ -24,7 +28,7 @@ void main() {
       'AND password is updated'
       'AND submit is called'
       'THEN modelStream emits the correct events', () async {
-    when(mockAuth!.signInWithEmailAndPassword(any, any))
+    when(mockAuth.signInWithEmailAndPassword(any, any))
         .thenThrow(PlatformException(code: 'ERROR'));
     expect(
         bloc.modelStream,

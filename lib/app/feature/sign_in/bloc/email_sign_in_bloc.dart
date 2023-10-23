@@ -6,7 +6,7 @@ import '../model/email_sign_in_model.dart';
 
 class EmailSignInBloc {
   EmailSignInBloc({required this.auth});
-  final AuthBase? auth;
+  final AuthBase auth;
 
   final _modelSubject = BehaviorSubject<EmailSignInModel>.seeded(EmailSignInModel());
   Stream<EmailSignInModel> get modelStream => _modelSubject.stream;
@@ -20,9 +20,9 @@ class EmailSignInBloc {
     updateWith(submitted: true, isLoading: true);
     try {
       if (_model.formType == EmailSignInFormType.signIn) {
-        await auth!.signInWithEmailAndPassword(_model.email, _model.password);
+        await auth.signInWithEmailAndPassword(_model.email, _model.password);
       } else {
-        await auth!.createUserWithEmailAndPassword(
+        await auth.createUserWithEmailAndPassword(
             _model.email, _model.password);
       }
     } catch (e) {

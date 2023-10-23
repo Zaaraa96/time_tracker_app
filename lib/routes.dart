@@ -15,8 +15,9 @@ import 'app/feature/jobs/model/job.dart';
 import 'app/feature/jobs/screen/edit_job_page.dart';
 import 'app/feature/jobs/screen/jobs_page.dart';
 import 'app/feature/sign_in/screen/email_sign_in_page.dart';
+import 'app/feature/sign_in/screen/sign_in_page.dart';
 import 'common_widgets/tab_item.dart';
-import 'app/feature/landing_page.dart';
+// import 'app/feature/landing_page.dart';
 import 'common_widgets/scaffold_with_nested_navigation.dart';
 import 'localization.dart';
 import 'navigation.dart';
@@ -27,13 +28,13 @@ final _shellNavigatorJobKey = GlobalKey<NavigatorState>(debugLabel: 'shellJob');
 final _shellNavigatorEntriesKey = GlobalKey<NavigatorState>(debugLabel: 'shellEntries');
 final _shellNavigatorAccountKey = GlobalKey<NavigatorState>(debugLabel: 'shellAccount');
 
-final routers = GoRouter(
+GoRouter routers(AuthBase auth) => GoRouter(
   initialLocation: '/',
 
   navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
   redirect: (context, state) {
-    final auth = Provider.of<AuthBase>(context, listen: false);
+    //final auth = auth;
     final path = state.uri.path;
 
     final isLoggedIn = auth.currentUser != null;
@@ -50,14 +51,12 @@ final routers = GoRouter(
     }
     return null;
   },
-  refreshListenable: GoRouterRefreshStream(Auth().authStateChanges()),
+  refreshListenable: GoRouterRefreshStream(auth.authStateChanges()),
   routes: [
     GoRoute(path: '/',
     name: landing,
     builder: (context, goRouteState){
-      return LandingPage(
-        databaseBuilder: (uid) => FirestoreDatabase(uid: uid),
-      );
+      return SignInPage.create(context);
     },
     routes: [
     GoRoute(
@@ -65,7 +64,7 @@ final routers = GoRouter(
     name: signIn,
     pageBuilder: (context, state)
     {
-      return MaterialPage(
+      return const MaterialPage(
           fullscreenDialog: true,
           child: EmailSignInPage());
     }
@@ -91,9 +90,9 @@ final routers = GoRouter(
               name: jobs,
               pageBuilder: (context, state)
               {
-                final uid = Provider.of<AuthBase>(context, listen: false).currentUser?.uid ?? '';
+                final uid = auth.currentUser?.uid ?? '';
                 return NoTransitionPage(
-                  child: Provider<Database?>(
+                  child: Provider<Database>(
                       create: (_) =>
                           FirestoreDatabase(uid:uid),
                       child: JobsPage(uid: uid)));
@@ -105,7 +104,7 @@ final routers = GoRouter(
                   pageBuilder: (context, state)
                   {
                     final job = state.extra as Job?;
-                    final uid = Provider.of<AuthBase>(context, listen: false).currentUser?.uid ?? '';
+                    final uid = auth.currentUser?.uid ?? '';
                     return MaterialPage(
                         fullscreenDialog: true,
                         child: EditJobPage(database: FirestoreDatabase(uid: uid), job: job,));}
@@ -116,7 +115,7 @@ final routers = GoRouter(
                   pageBuilder: (context, state)
                   {
                     final entryJob = state.extra as EntryJobCombinedModel;
-                    final uid = Provider.of<AuthBase>(context, listen: false).currentUser?.uid ?? '';
+                    final uid = auth.currentUser?.uid ?? '';
                     return  MaterialPage(
                       child: EntryPage(database: FirestoreDatabase(uid: uid), job: entryJob.job, entry: entryJob.entry),
                       fullscreenDialog: true,
@@ -128,7 +127,7 @@ final routers = GoRouter(
                   pageBuilder: (context, state)
                   {
                     final job = state.extra as Job;
-                    final uid = Provider.of<AuthBase>(context, listen: false).currentUser?.uid ?? '';
+                    final uid = auth.currentUser?.uid ?? '';
                     return
                       CupertinoPage(
                         fullscreenDialog: false,
@@ -148,9 +147,9 @@ final routers = GoRouter(
               name: entries,
               pageBuilder: (context, state)
               {
-                final uid = Provider.of<AuthBase>(context, listen: false).currentUser?.uid ?? '';
+                final uid = auth.currentUser?.uid ?? '';
                 return NoTransitionPage(
-                  child: Provider<Database?>(
+                  child: Provider<Database>(
                     create: (_) =>
                         FirestoreDatabase(uid: uid),
                     child: Consumer<Database>(

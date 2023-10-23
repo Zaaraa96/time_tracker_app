@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:time_tracker_app/app/home/job_entries/format.dart';
+import 'package:time_tracker_app/app/feature/job_entries/model/format.dart';
 
 void main() {
   group('hours', () {
