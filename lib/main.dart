@@ -20,7 +20,7 @@ import 'localization.dart';
 //5.make app feature first
 //todo: 6.add repository pattern
 //7.add icon for app done
-//todo: 8.test
+//8.test
 //9.build for web
 
 Future<void> main() async {
