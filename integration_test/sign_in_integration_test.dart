@@ -25,8 +25,6 @@ void main() {
   late StreamController<User?> onAuthStateChangedController;
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-
-
     mockAuth = MockAuthBase();
     mockDatabase = MockDatabase();
    onAuthStateChangedController = StreamController<User?>();
@@ -36,66 +34,19 @@ void main() {
     onAuthStateChangedController.close();
   });
 
-  void stubOnAuthStateChangedYields(Iterable<User?> onAuthStateChanged) {
-
-    onAuthStateChangedController.addStream(
-      Stream<User?>.fromIterable(onAuthStateChanged),
-    );
-
-  }
-
-
-
-  Future<void> pumpMaterialAppWithRouter(WidgetTester tester) async {
-    await tester.pumpWidget(
-      Provider<AuthBase>(
-        create: (_) => mockAuth,
-        child: Consumer<AuthBase>(
-          builder: (BuildContext context, AuthBase auth, Widget? child) {
-            return MaterialApp.router(
-              routerConfig: routers(auth, mockDatabase),
-              // home: LandingPage(
-              //   databaseBuilder: (_) => mockDatabase,
-              // ),
-            );
-          },
-        ),
-      ),
-    );
-    await tester.pump();
-  }
-
-  Future<void> tapSignInButton(WidgetTester tester) async {
-
-    await tester.pump();
-    final signInGoogleButton = find.text('Sign in with Google');
-    expect(signInGoogleButton, findsOneWidget);
-    await tester.tap(signInGoogleButton);
-    await tester.pump();
-
-  }
-
   testWidgets('Sign in flow', (tester) async {
 
+    final r = AuthRobot(tester);
     when(mockDatabase.jobsStream()).thenAnswer((_)=>Stream<List<Job>>.fromFutures([]));
 
     when(mockAuth.authStateChanges()).thenAnswer((_) {
       return onAuthStateChangedController.stream;
     });
 
-    await pumpMaterialAppWithRouter(tester);
+    await r.pumpMaterialAppWithRouter(mockAuth, mockDatabase);
     expect(find.byType(SignInPage), findsOneWidget);
 
-
-    // print('this line is called');
-
-    // when(mockAuth.signInWithGoogle()).thenAnswer((_)
-    // {
-    //   print('this when is called');
-    //   return Future.value(MockUser());
-    // });
-
-    await tapSignInButton(tester); //todo: test loading
+    await r.tapSignInButton();
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
 
