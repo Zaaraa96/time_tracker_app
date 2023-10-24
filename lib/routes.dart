@@ -28,14 +28,12 @@ final _shellNavigatorJobKey = GlobalKey<NavigatorState>(debugLabel: 'shellJob');
 final _shellNavigatorEntriesKey = GlobalKey<NavigatorState>(debugLabel: 'shellEntries');
 final _shellNavigatorAccountKey = GlobalKey<NavigatorState>(debugLabel: 'shellAccount');
 
-GoRouter routers(AuthBase auth, Database database) => GoRouter(
+GoRouter routers(AuthBase auth, Database database, {List<NavigatorObserver>? observers=const[] }) => GoRouter(
   initialLocation: '/',
-
+  observers:observers,
   navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
   redirect: (context, state) {
-    print('state is changed');
-    //final auth = auth;
     final path = state.uri.path;
 
     final isLoggedIn = auth.currentUser != null;

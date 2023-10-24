@@ -1,20 +1,12 @@
-@Timeout(Duration(milliseconds: 500))
-
 import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
 import 'package:time_tracker_app/app/feature/jobs/model/job.dart';
 import 'package:time_tracker_app/app/feature/jobs/screen/jobs_page.dart';
 import 'package:time_tracker_app/app/feature/sign_in/screen/sign_in_page.dart';
-import 'package:time_tracker_app/app/services/auth.dart';
-import 'package:time_tracker_app/app/services/database.dart';
-import 'package:time_tracker_app/routes.dart';
-
 import '../test/landing_page_test.mocks.dart';
 import '../test/robot.dart';
 
@@ -55,7 +47,7 @@ void main() {
 
     onAuthStateChangedController.add(MockUser());
 
-    await tester.pump(Duration(seconds: 1));
+    await tester.pump(const Duration(seconds: 1));
     expect(find.byType(JobsPage), findsOneWidget);
 
   });

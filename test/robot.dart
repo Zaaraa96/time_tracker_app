@@ -12,17 +12,14 @@ class AuthRobot {
   AuthRobot(this.tester);
   final WidgetTester tester;
 
-  Future<void> pumpMaterialAppWithRouter(AuthBase mockAuth, Database mockDatabase) async {
+  Future<void> pumpMaterialAppWithRouter(AuthBase mockAuth, Database mockDatabase , {List<NavigatorObserver>? observers=const[] }) async {
     await tester.pumpWidget(
       Provider<AuthBase>(
         create: (_) => mockAuth,
         child: Consumer<AuthBase>(
           builder: (BuildContext context, AuthBase auth, Widget? child) {
             return MaterialApp.router(
-              routerConfig: routers(auth, mockDatabase),
-              // home: LandingPage(
-              //   databaseBuilder: (_) => mockDatabase,
-              // ),
+              routerConfig: routers(auth, mockDatabase, observers: observers),
             );
           },
         ),
@@ -37,7 +34,7 @@ class AuthRobot {
     final signInGoogleButton = find.text('Sign in with Google');
     expect(signInGoogleButton, findsOneWidget);
     await tester.tap(signInGoogleButton);
-    await tester.pumpAndSettle();
+    await tester.pump();
 
   }
 

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:time_tracker_app/app/sign_in/bloc/validators.dart';
+import 'package:time_tracker_app/utils.dart';
 
 void main() {
   test('non empty string', () {
