@@ -1,21 +1,18 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
 import 'package:time_tracker_app/app/feature/jobs/model/job.dart';
 import 'package:time_tracker_app/app/feature/jobs/screen/jobs_page.dart';
 import 'package:time_tracker_app/app/feature/sign_in/screen/sign_in_page.dart';
 import 'package:time_tracker_app/app/services/auth.dart';
 import 'package:time_tracker_app/app/services/database.dart';
-import 'package:time_tracker_app/routes.dart';
 
-import 'mocks.dart';
 @GenerateNiceMocks([MockSpec<AuthBase>(), MockSpec<User>(), MockSpec<Database>()])
 import 'landing_page_test.mocks.dart';
+import 'robot.dart';
 
 void main() {
   late MockAuthBase mockAuth;
@@ -32,24 +29,6 @@ void main() {
     onAuthStateChangedController.close();
   });
 
-  Future<void> pumpLandingPage(WidgetTester tester) async {
-    await tester.pumpWidget(
-      Provider<AuthBase>(
-        create: (_) => mockAuth,
-        child: Consumer<AuthBase>(
-          builder: (BuildContext context, AuthBase auth, Widget? child) {
-           return MaterialApp.router(
-              routerConfig: routers(auth, mockDatabase),
-              // home: LandingPage(
-              //   databaseBuilder: (_) => mockDatabase,
-              // ),
-            );
-          },
-        ),
-      ),
-    );
-    await tester.pump();
-  }
 
   void stubOnAuthStateChangedYields(Iterable<User?> onAuthStateChanged) {
 
@@ -62,24 +41,25 @@ void main() {
   }
 
   testWidgets('stream waiting', (WidgetTester tester) async {
-
+    final r = AuthRobot(tester);
     stubOnAuthStateChangedYields([]);
 
-    await pumpLandingPage(tester);
+    await r.pumpMaterialAppWithRouter(mockAuth, mockDatabase);
 
     expect(find.byType(SignInPage), findsOneWidget);
   });
 
   testWidgets('null user', (WidgetTester tester) async {
-
+    final r = AuthRobot(tester);
     stubOnAuthStateChangedYields([null]);
 
-    await pumpLandingPage(tester);
+    await r.pumpMaterialAppWithRouter(mockAuth, mockDatabase);
 
     expect(find.byType(SignInPage), findsOneWidget);
   });
 
   testWidgets('non-null user', (WidgetTester tester) async {
+    final r = AuthRobot(tester);
     when(MockUser().uid).thenReturn('123');
 
     when( mockAuth.currentUser).thenReturn(MockUser());
@@ -87,7 +67,7 @@ void main() {
 
     stubOnAuthStateChangedYields([MockUser()]);
 
-    await pumpLandingPage(tester);
+    await r.pumpMaterialAppWithRouter(mockAuth, mockDatabase);
 
     expect(find.byType(JobsPage), findsOneWidget);
   });

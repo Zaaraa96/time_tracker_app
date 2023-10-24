@@ -34,6 +34,7 @@ GoRouter routers(AuthBase auth, Database database) => GoRouter(
   navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
   redirect: (context, state) {
+    print('state is changed');
     //final auth = auth;
     final path = state.uri.path;
 
